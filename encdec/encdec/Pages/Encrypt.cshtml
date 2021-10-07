@@ -1,0 +1,22 @@
+﻿@page
+@model azure_manager.Pages.EncryptModel
+@{
+    ViewData["Title"] = "Encrypt Data";
+}
+
+<form method="post">
+    <div class="alert alert-success @(string.IsNullOrWhiteSpace(Model?.EncryptData?.Result?.Success) ? "invisible" : string.Empty)" role="alert">
+        <h4 class="alert-heading">@Model?.EncryptData?.Result?.Success</h4>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <p class="text-danger @(string.IsNullOrWhiteSpace(Model?.EncryptData?.Result?.Error) ? "invisible" : string.Empty)">@Model?.EncryptData?.Result?.Error</p>
+    <div class="form-group">
+        <label>Plain Text To Encrypt</label>
+        <input asp-for="EncryptData.PlainText" class="form-control" placeholder="Enter the plain text" />
+    </div>
+    <input type="submit" value="Encrypt" class="btn btn-primary" />
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

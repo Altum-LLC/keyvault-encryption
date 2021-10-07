@@ -1,0 +1,22 @@
+﻿@page
+@model azure_manager.Pages.DecryptManagedIdModel
+@{
+    ViewData["Title"] = "Decrypt Data using Azure Managed Identity";
+}
+
+<form method="post">
+    <div class="alert alert-success @(string.IsNullOrWhiteSpace(Model?.DecryptData?.Result?.Success) ? "invisible" : string.Empty)" role="alert">
+        <h4 class="alert-heading">@Model?.DecryptData?.Result?.Success</h4>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <p class="text-danger @(string.IsNullOrWhiteSpace(Model?.DecryptData?.Result?.Error) ? "invisible" : string.Empty)">@Model?.DecryptData?.Result?.Error</p>
+    <div class="form-group">
+        <label>Plain Text To Encrypt</label>
+        <input asp-for="DecryptData.EncryptedText" class="form-control" placeholder="Enter the encrypted text" />
+    </div>
+    <input type="submit" value="Decrypt" class="btn btn-primary" />
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
