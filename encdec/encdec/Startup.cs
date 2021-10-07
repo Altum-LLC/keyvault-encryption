@@ -48,7 +48,9 @@ namespace azure_manager
                     microsoftIdentityOptions.ClientSecret = Configuration.GetValue<string>("AzureAd:ClientSecret");
                 })
                 .EnableTokenAcquisitionToCallDownstreamApi(new string[] { "user.read" })
-                .AddInMemoryTokenCaches();
+                .AddDistributedTokenCaches();
+
+            services.AddDistributedMemoryCache();
 
             services.AddControllersWithViews(options =>
             {
